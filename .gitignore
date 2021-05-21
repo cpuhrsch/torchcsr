@@ -242,3 +242,4 @@ TAGS
 *.rej
 
 !build_with_submodule.sh
+!build_tools
