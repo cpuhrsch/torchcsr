@@ -4,3 +4,6 @@
 [submodule "third_party/glog"]
 	path = third_party/glog
 	url = https://github.com/google/glog
+[submodule "third_party/kineto"]
+	path = third_party/kineto
+	url = https://github.com/pytorch/kineto
