@@ -19,9 +19,7 @@ target_compile_definitions(
   _torchcsr PRIVATE TORCH_API_INCLUDE_EXTENSION_H
 )
 
-if (USE_CUDA)
-  target_compile_definitions(_torchcsr PRIVATE USE_CUDA)
-endif()
+target_compile_definitions(_torchcsr PRIVATE USE_CUDA)
 
 target_include_directories(
   _torchcsr
@@ -32,6 +30,9 @@ target_include_directories(
 
 # See https://github.com/pytorch/pytorch/issues/38122
 find_library(TORCH_PYTHON_LIBRARY torch_python PATHS "${TORCH_INSTALL_PREFIX}/lib")
+
+message(STATUS "MY_VARIABLE=${TORCHCSR_THIRD_PARTIES}")
+
 
 target_link_libraries(
   _torchcsr
