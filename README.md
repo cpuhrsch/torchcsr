@@ -4,20 +4,24 @@
 clear && python setup.py clean && DEBUG=0 USE_NINJA=1 pip install -v -e .
 ```
 
-### Reproduce error
+### Run softmax
 
 Run
 ```
-python repro.py
+python run.py
 ```
 
 which contains
 
 ```
 import torch
-import nestedtensor
-a = nestedtensor._C.nested_tensor_impl(4)
-b = torch.matmul(a, torch.tensor([1]))
-```
+import torchcsr
 
-Expecting this to print and then immediately exit from within the matmul kernel registered in nestedtensor/csrc/matmul.cpp.
+crow_indices = [0, 2, 4]
+col_indices = [0, 1, 0, 1]
+values = [1, 2, 3, 4]
+a = torch.sparse_csr_tensor(torch.tensor(crow_indices, dtype=torch.int64),
+                        torch.tensor(col_indices, dtype=torch.int64),
+                        torch.tensor(values), dtype=torch.double)
+print(torch.softmax(a, 1))
+```
