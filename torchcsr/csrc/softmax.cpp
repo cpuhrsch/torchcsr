@@ -6,12 +6,14 @@ namespace F = torch::nn::functional;
 
 namespace at {
 
-Tensor torchcsr_softmax(Tensor tensor, int64_t dim, c10::optional<ScalarType> dtype) {
+Tensor torchcsr_softmax(const Tensor& tensor, int64_t dim, c10::optional<ScalarType> dtype) {
   TORCH_CHECK(!dtype, "dtype not supported for CSR softmax.");
+  std::cout << "Calling softmax" << std::endl;
   return tensor;
 }
 
 TORCH_LIBRARY_IMPL(aten, SparseCsrCPU, m) {
-  m.impl("softmax.int", torchcsr_softmax)
+  m.impl("softmax.int", torchcsr_softmax);
 }
+
 } // namespace at
