@@ -26,7 +26,7 @@ def read(*names, **kwargs):
 
 version = "0.0.1"
 sha = "Unknown"
-package_name = "nestedtensor"
+package_name = "torchcsr"
 
 cwd = os.path.dirname(os.path.abspath(__file__))
 
@@ -48,11 +48,11 @@ print("Building wheel {}-{}".format(package_name, version))
 
 
 def write_version_file():
-    version_path = os.path.join(cwd, "nestedtensor", "version.py")
+    version_path = os.path.join(cwd, "torchcsr", "version.py")
     with open(version_path, "w") as f:
         f.write("__version__ = '{}'\n".format(version))
         f.write("git_version = {}\n".format(repr(sha)))
-        f.write("from nestedtensor import _C\n")
+        f.write("from torchcsr import _C\n")
         f.write("if hasattr(_C, 'CUDA_VERSION'):\n")
         f.write("    cuda = _C.CUDA_VERSION\n")
 
@@ -96,10 +96,10 @@ def get_extensions():
         extra_compile_args["nvcc"] = nvcc_flags
 
     if sys.platform == "win32":
-        define_macros += [("nestedtensor_EXPORTS", None)]
+        define_macros += [("torchcsr_EXPORTS", None)]
 
     this_dir = os.path.dirname(os.path.abspath(__file__))
-    extensions_dir = os.path.join(this_dir, "nestedtensor", "csrc")
+    extensions_dir = os.path.join(this_dir, "torchcsr", "csrc")
     utils_dir = os.path.join(extensions_dir, "utils")
 
     extension_sources = set(
@@ -116,7 +116,7 @@ def get_extensions():
 
     ext_modules = [
         extension(
-            "nestedtensor._C",
+            "torchcsr._C",
             sources,
             include_dirs=[this_dir],
             define_macros=define_macros,
@@ -148,10 +148,10 @@ setuptools.setup(
     version=version,
     author="Christian Puhrsch",
     author_email="cpuhrsch@fb.com",
-    description="NestedTensors for PyTorch",
+    description="torchcsr for PyTorch",
     long_description=readme,
     long_description_content_type="text/markdown",
-    url="https://github.com/pytorch/nestedtensor",
+    url="https://github.com/cpuhrsch/torchcsr",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
