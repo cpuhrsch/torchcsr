@@ -8,6 +8,6 @@ using namespace at;
 static c10::InferenceMode guard;
 
 
-PYBIND11_MODULE(TORCH_EXTENSION_NAME, m) {
+PYBIND11_MODULE(_torchcsr, m) {
 
 }

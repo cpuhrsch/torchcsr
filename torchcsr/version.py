@@ -1,5 +1,5 @@
-__version__ = '0.0.1+f9a9a9f'
-git_version = 'f9a9a9f7991474ed4be956f4991aa6cc3f2e992d'
+__version__ = '0.0.1+22f6c37'
+git_version = '22f6c3748647e9ad68899e06700a96675c898ec8'
 from torchcsr import _C
 if hasattr(_C, 'CUDA_VERSION'):
     cuda = _C.CUDA_VERSION

@@ -1,0 +1,11 @@
+set(TORCHCSR_THIRD_PARTIES "")
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden")
+
+set(CUDA_ARCHS "sm60")
+add_subdirectory(sputnik)
+
+list(APPEND TORCHCSR_THIRD_PARTIES sputnik)
+
+set_property(GLOBAL PROPERTY TORCHCSR_THIRD_PARTIES "${TORCHCSR_THIRD_PARTIES}")
+

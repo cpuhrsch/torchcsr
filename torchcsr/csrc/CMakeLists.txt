@@ -38,7 +38,6 @@ target_link_libraries(
   ${TORCH_LIBRARIES}
   ${TORCH_PYTHON_LIBRARY}
   ${TORCHCSR_THIRD_PARTIES}
-  ${ADDITIONAL_ITEMS}
   )
 
 install(

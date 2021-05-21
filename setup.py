@@ -8,6 +8,7 @@ import subprocess
 import sys
 import io
 from build_tools import setup_helpers
+from setuptools import setup, find_packages
 
 from torch.utils.cpp_extension import (
     CppExtension,
@@ -144,7 +145,7 @@ class clean(distutils.command.clean.clean):
         distutils.command.clean.clean.run(self)
 
 
-setuptools.setup(
+setup(
     name=package_name,
     version=version,
     author="Christian Puhrsch",
@@ -153,16 +154,16 @@ setuptools.setup(
     long_description=readme,
     long_description_content_type="text/markdown",
     url="https://github.com/cpuhrsch/torchcsr",
-    packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
         "Operating System :: OS Independent",
     ],
-    zip_safe=True,
+    packages=find_packages(exclude=["build*", "test*", "torchcsrc.csrc*", "third_party*", "build_tools*"]),
+    ext_modules=setup_helpers.get_ext_modules(),
     cmdclass={
         "clean": clean,
         "build_ext": setup_helpers.CMakeBuild,
     },
     install_requires=requirements,
-    ext_modules=get_extensions(),
+    zip_safe=False,
 )
