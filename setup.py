@@ -7,6 +7,7 @@ import glob
 import subprocess
 import sys
 import io
+from build_tools import setup_helpers
 
 from torch.utils.cpp_extension import (
     CppExtension,
@@ -160,10 +161,7 @@ setuptools.setup(
     zip_safe=True,
     cmdclass={
         "clean": clean,
-        "build_ext": BuildExtension.with_options(
-            no_python_abi_suffix=True,
-            use_ninja=os.environ.get("USE_NINJA", False)
-        ),
+        "build_ext": setup_helpers.CMakeBuild,
     },
     install_requires=requirements,
     ext_modules=get_extensions(),
