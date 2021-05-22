@@ -1,7 +1,9 @@
 ### Build
 
+Run on Linux, Volta GPU, recent PyTorch nightly
+
 ```
-clear && python setup.py clean && DEBUG=0 USE_NINJA=1 pip install -v -e .
+python setup.py clean && TORCH_CUDA_ARCH_LIST=Volta python setup.py develop
 ```
 
 ### Run softmax
@@ -11,17 +13,11 @@ Run
 python run.py
 ```
 
-which contains
+which contains a padded+masked implementation of softmax and a call into sparse_softmax.
 
-```
-import torch
-import torchcsr
+### TODO
 
-crow_indices = [0, 2, 4]
-col_indices = [0, 1, 0, 1]
-values = [1, 2, 3, 4]
-a = torch.sparse_csr_tensor(torch.tensor(crow_indices, dtype=torch.int64),
-                        torch.tensor(col_indices, dtype=torch.int64),
-                        torch.tensor(values), dtype=torch.double)
-print(torch.softmax(a, 1))
-```
+ - Sparse CUDA kernel is registered at CPU with to/from device conversion. SparseCsrCUDA has no constructor, but we can add coverage out of tree here.
+
+ - Need to setup row_offsets correctly in call to sputnik sparse_softmax
+

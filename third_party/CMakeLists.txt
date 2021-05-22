@@ -8,8 +8,8 @@ set(BUILD_TEST OFF)
 set(DBUILD_BENCHMARK OFF)
 add_subdirectory(sputnik)
 message(STATUS "ASDF=${CMAKE_CURRENT_SOURCE_DIR}")
+# find_dependency(sputnik REQUIRED)
 target_include_directories(libsputnik INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/sputnik")
-# target_link_libraries(libsputnik INTERFACE ${SOX_LIBRARIES})
 
 list(APPEND TORCHCSR_THIRD_PARTIES libsputnik)
 
